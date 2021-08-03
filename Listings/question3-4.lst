@@ -1,0 +1,36 @@
+A51 MACRO ASSEMBLER  QUESTION3_4                                                          04/14/2020 17:13:42 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\question3-4.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE question3-4.a51 SET(SMALL) DEBUG PRINT(.\Listings\question3-4.lst) OBJE
+                      CT(.\Objects\question3-4.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+0000 75E049            2             MOV ACC ,#49H
+0003 B2E7              3             CPL ACC.7
+0005 B2E6              4             CPL ACC.6
+0007 B2E5              5             CPL ACC.5
+0009 B2E4              6             CPL ACC.4
+000B D2E4              7             SETB ACC.4
+000D D2E3              8             SETB ACC.3
+000F C2E1              9             CLR ACC.1
+0011 C2E0             10             CLR ACC.0
+*** WARNING #A41 IN 10 (question3-4.a51, LINE 10): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  QUESTION3_4                                                          04/14/2020 17:13:42 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

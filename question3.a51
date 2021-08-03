@@ -1,0 +1,6 @@
+ORG 0200H
+	MOV A,#49H
+	;MOV B, A[3:7]
+	CPL A
+	
+END

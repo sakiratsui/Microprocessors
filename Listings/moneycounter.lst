@@ -1,0 +1,267 @@
+C51 COMPILER V9.60.0.0   MONEYCOUNTER                                                      06/18/2020 19:51:57 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MONEYCOUNTER
+OBJECT MODULE PLACED IN .\Objects\moneycounter.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE moneycounter.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listi
+                    -ngs\moneycounter.lst) TABS(2) OBJECT(.\Objects\moneycounter.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include <stdio.h>
+   3          #include <string.h>
+   4          
+   5          #define satir1 0x80
+   6          #define satir2 0xC0
+   7          #define satir3 0x94
+   8          #define satir4 0xD4
+   9          
+  10          
+  11          void Timer0Delay(void);
+  12          void cct_init(void);
+  13          void delay(int);
+  14          void lcdinit(void);
+  15          void writecmd(int);
+  16          void writedata(char);
+  17          void ReturnHome(void);
+  18          
+  19          void gecikme(unsigned int);
+  20          void lcd_yaz(unsigned char d[]);
+  21          void T0M1Delay(void);
+  22          void ReturnHome(void);
+  23          void para_yaz(void);
+  24          sbit RS=P1^6;
+  25          sbit E=P1^7;
+  26          
+  27          sbit bestl=P1^0;
+  28          sbit ontl=P1^1;
+  29          sbit yirmitl=P1^2;
+  30          sbit ellitl=P1^3;
+  31          sbit yuztl=P1^4;
+  32          sbit ikiyuztl=P1^5;
+  33          
+  34          
+  35          unsigned int p0;
+  36          unsigned int p1;
+  37          unsigned int p2;
+  38          unsigned int p3;
+  39          unsigned int p4;
+  40          unsigned int p5;
+  41          
+  42          unsigned int bes_say;
+  43          unsigned int on_say;
+  44          unsigned int yirmi_say;
+  45          unsigned int elli_say;
+  46          unsigned int bir_say;
+  47          unsigned int ikiyuz_say;
+  48          
+  49          
+  50          unsigned int x;
+  51          unsigned int y;
+  52          unsigned long int total;
+  53          unsigned char guncel_tutar[]="";
+  54          unsigned char satir2_paralar[]="";
+C51 COMPILER V9.60.0.0   MONEYCOUNTER                                                      06/18/2020 19:51:57 PAGE 2   
+
+  55          unsigned char satir3_paralar[]="";
+  56          unsigned char satir4_paralar[]="";
+  57          unsigned char reset[]="";
+  58          unsigned int a;
+  59          unsigned int b;
+  60          
+  61          void timer0(void) interrupt 1{ //timerinterrupt0
+  62   1          
+  63   1          writecmd(0x94);
+  64   1          lcd_yaz("Sistem Resetlendi");
+  65   1          writecmd(0xD4);
+  66   1          lcd_yaz(guncel_tutar);
+  67   1          ET0=0;
+  68   1          total=0;
+  69   1      }
+  70          
+  71          void T0M1Delay(void){
+  72   1              TH0 = 0x3C; //yaklasik 50000 
+  73   1              TL0 = 0xB0;
+  74   1              TR0=1; //timer0 baslatildi.
+  75   1              while(TF0==0); //timer flag overflow'u beklenir.
+  76   1              TR0=0;
+  77   1              TF0=0;
+  78   1      }
+  79          
+  80          void delay(int a){
+  81   1        int i;
+  82   1        for(i=0;i<a;i++);
+  83   1      }
+  84          
+  85          void gecikme(unsigned int time){
+  86   1        unsigned int i,j;
+  87   1        for(i=0;i<time;i++){
+  88   2          for(j=0;j<100;j++){
+  89   3          }
+  90   2        }
+  91   1      }
+  92          
+  93          void INTER(void) interrupt 0{
+  94   1        
+  95   1        if(p0==0){
+  96   2          bes_say+=1;
+  97   2          total+=5; 
+  98   2        }
+  99   1      
+ 100   1        if(p1==0){
+ 101   2          on_say+=1;
+ 102   2          total+=10;  
+ 103   2        }
+ 104   1        if(p2==0){
+ 105   2          yirmi_say+=1;
+ 106   2          total+=20;  
+ 107   2        }
+ 108   1        if(p3==0){
+ 109   2          elli_say+=1;
+ 110   2          total+=50;  
+ 111   2        }
+ 112   1        if(p4==0){
+ 113   2          bir_say+=1;
+ 114   2          total+=100;
+ 115   2        }
+ 116   1        if(p5==0){
+C51 COMPILER V9.60.0.0   MONEYCOUNTER                                                      06/18/2020 19:51:57 PAGE 3   
+
+ 117   2          ikiyuz_say+=1;
+ 118   2          total+=200;
+ 119   2        }
+ 120   1        a=(int)total;
+ 121   1        sprintf(guncel_tutar,"%d TL",a);
+ 122   1        writecmd(0x80);
+ 123   1        lcd_yaz(guncel_tutar);
+ 124   1        para_yaz();
+ 125   1      
+ 126   1        }         
+ 127            
+ 128            
+ 129          
+ 130          void para_yaz(void){
+ 131   1        
+ 132   1        writecmd(0xC0);
+ 133   1        sprintf(satir2_paralar,"5:%d 50:%d",bes_say,elli_say);
+ 134   1        lcd_yaz(satir2_paralar);
+ 135   1        writecmd(0x94);
+ 136   1        sprintf(satir3_paralar,"10:%d 100:%d",on_say,bir_say);
+ 137   1        lcd_yaz(satir3_paralar);
+ 138   1        writecmd(0xD4);
+ 139   1        sprintf(satir4_paralar,"20:%d",yirmi_say);
+ 140   1        lcd_yaz(satir4_paralar);
+ 141   1      
+ 142   1      
+ 143   1      
+ 144   1      }
+ 145          
+ 146          
+ 147          void lcd_yaz(char str[]){
+ 148   1        unsigned char j=0;
+ 149   1        while(str[j]!=0){
+ 150   2          writedata(str[j]);
+ 151   2          j++;
+ 152   2        }
+ 153   1        while(j<20){
+ 154   2          writedata(' ');
+ 155   2          j++;
+ 156   2        
+ 157   2        }
+ 158   1        
+ 159   1      }
+ 160          void lcdinit(void)
+ 161          {
+ 162   1          delay(15000);
+ 163   1         writecmd(0x30);
+ 164   1           delay(4500);
+ 165   1         writecmd(0x30);
+ 166   1           delay(300);
+ 167   1         writecmd(0x30);
+ 168   1           delay(650);
+ 169   1      
+ 170   1         writecmd(0x38);    //function set
+ 171   1         writecmd(0x0c);    //display on,cursor off,blink off
+ 172   1         writecmd(0x01);    //clear display
+ 173   1         writecmd(0x06);    //entry mode, set increment 
+ 174   1      }
+ 175          void writecmd(int z)
+ 176          {
+ 177   1         RS = 0;             // => RS = 0
+ 178   1         P2 = z;             //Data transfer
+C51 COMPILER V9.60.0.0   MONEYCOUNTER                                                      06/18/2020 19:51:57 PAGE 4   
+
+ 179   1         E  = 1;             // => E = 1
+ 180   1         delay(150);
+ 181   1         E  = 0;             // => E = 0
+ 182   1         delay(150);
+ 183   1      }
+ 184          
+ 185          void writedata(char t){
+ 186   1        RS=1;
+ 187   1        P2=t;
+ 188   1        E=1;
+ 189   1        delay(150);
+ 190   1        E=0;
+ 191   1        delay(150);
+ 192   1      }
+ 193          
+ 194          void ReturnHome(void)     //Return to 0 location
+ 195          {
+ 196   1        writecmd(0x02);
+ 197   1          delay(1500);
+ 198   1      }
+ 199          void main(void){
+ 200   1        
+ 201   1        P0=0x00;
+ 202   1        P1=0xFF;
+ 203   1        P2=0x00;
+ 204   1        P3=0x14;
+ 205   1        TMOD=0x01;
+ 206   1        EX0=1;
+ 207   1        IT0=1;
+ 208   1        EA=1;
+ 209   1        
+ 210   1        lcdinit();
+ 211   1        writecmd(0x80);
+ 212   1        lcd_yaz("PARA SAYMA MAKINESI");
+ 213   1        
+ 214   1        ReturnHome();
+ 215   1        
+ 216   1        
+ 217   1        for(x=0 ; x<100 ; x++){
+ 218   2              for(y=0 ; y<6 ; y++){ //1dk boyunca bekliyor. interr gelmezse timer interupta girer.
+ 219   3                  p0=bestl;
+ 220   3                  p1=ontl;
+ 221   3                  p2=yirmitl;
+ 222   3                  p3=ellitl;
+ 223   3                  p4=yuztl;
+ 224   3                  p5=ikiyuztl;
+ 225   3                  T0M1Delay();
+ 226   3          }
+ 227   2        }
+ 228   1        ET0=1;
+ 229   1        
+ 230   1      }
+ 231            
+ 232          
+ 233          
+ 234          
+ 235          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    932    ----
+   CONSTANT SIZE    =     74    ----
+C51 COMPILER V9.60.0.0   MONEYCOUNTER                                                      06/18/2020 19:51:57 PAGE 5   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     41       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

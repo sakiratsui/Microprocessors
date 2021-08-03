@@ -1,0 +1,28 @@
+A51 MACRO ASSEMBLER  EXP2C                                                                05/28/2020 13:36:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Exp2c.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Exp2c.a51 SET(SMALL) DEBUG PRINT(.\Listings\Exp2c.lst) OBJECT(.\Objects
+                      \Exp2c.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000 749C              1     MOV A, #9CH
+0002 2464              2     ADD A, #64H
+                       3             
+*** WARNING #A41 IN 3 (Exp2c.a51, LINE 3): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  EXP2C                                                                05/28/2020 13:36:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

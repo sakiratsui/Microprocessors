@@ -1,0 +1,32 @@
+A51 MACRO ASSEMBLER  EXP2B                                                                04/14/2020 18:17:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\Exp2b.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE Exp2b.a51 SET(SMALL) DEBUG PRINT(.\Listings\Exp2b.lst) OBJECT(.\Objects
+                      \Exp2b.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000 7400              1     MOV A,#0
+0002 7801              2     MOV R0,#1
+0004                   3     DONGU:
+0004 28                4             ADD A,R0
+0005 08                5             INC R0
+0006 B80BFB            6             CJNE R0,#11, DONGU
+                       7     END
+A51 MACRO ASSEMBLER  EXP2B                                                                04/14/2020 18:17:50 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DONGU. . . . . . .  C ADDR   0004H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

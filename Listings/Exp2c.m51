@@ -1,0 +1,41 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    05/28/2020  13:38:20  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\Exp2c.obj TO .\Objects\Exp2c PRINT (.\Listings\Exp2c.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Exp2c.obj (EXP2C)
+
+
+LINK MAP OF MODULE:  .\Objects\Exp2c (EXP2C)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0004H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Exp2c (EXP2C)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        EXP2C
+  C:0000H         LINE#         65533
+  C:0002H         LINE#         2
+  -------         ENDMOD        EXP2C
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0004H BYTE ( 0%) *
+******************************************************************************
+
+Program Size: data=8.0 xdata=0 code=4
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

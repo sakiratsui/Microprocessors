@@ -1,0 +1,30 @@
+A51 MACRO ASSEMBLER  QUESTION3                                                            04/14/2020 17:00:15 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\question3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE question3.a51 SET(SMALL) DEBUG PRINT(.\Listings\question3.lst) OBJECT(.
+                      \Objects\question3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0200                   1     ORG 0200H
+0200 7449              2             MOV A,#49H
+                       3             ;MOV B, A[3:7]
+0202 F4                4             CPL A
+                       5             
+                       6     END
+A51 MACRO ASSEMBLER  QUESTION3                                                            04/14/2020 17:00:15 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
